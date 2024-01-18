@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name:       Piccy
- * Description:       Example block scaffolded with Create Block tool.
+ * Plugin Name:       Piccy Block
+ * Description:       Plugin with example Gutenberg block named Piccy scaffolded with Create Block tool.
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Author:            Marcin Szczepkowski
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       piccy
+ * Text Domain:       imaszpiccy
  *
  * @package           create-block
  */
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function piccy_piccy_block_init() {
-	register_block_type( __DIR__ . '/build' );
+function imaszpiccy_block_init() {
+	register_block_type( __DIR__ . '/build/blocks/piccyGallery/' );
 }
-add_action( 'init', 'piccy_piccy_block_init' );
+add_action( 'init', 'imaszpiccy_block_init' );

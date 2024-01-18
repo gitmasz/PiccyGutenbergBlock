@@ -1,10 +1,10 @@
 {
-	"name": "piccy",
+	"name": "imaszpiccy",
 	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"description": "Example block named Piccy scaffolded with Create Block tool.",
+	"author": "Marcin Szczepkowski",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
+	"main": "build/blocks/piccyGallery/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format": "wp-scripts format",
