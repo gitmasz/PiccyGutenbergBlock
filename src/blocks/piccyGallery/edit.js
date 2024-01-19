@@ -11,7 +11,16 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	BlockControls
+} from '@wordpress/block-editor';
+import {
+	ToolbarGroup,
+	ToolbarButton,
+	Icon
+} from "@wordpress/components";
+import { useState } from "@wordpress/element";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,6 +38,36 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
+import metadata from "./block.json";
+
 export default function Edit() {
-	return null;
+	const blockProps = useBlockProps();
+	const [editMode, setEditMode] = useState(true);
+
+	return (
+		<>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon={
+							editMode ? (
+								<Icon icon="welcome-view-site" />
+							) : (
+								<Icon icon="edit" />
+							)
+						}
+						label={
+							editMode
+								? __("Preview gallery", metadata.textdomain)
+								: __("Edit gallery", metadata.textdomain)
+						}
+						onClick={() => {
+							setEditMode((prevState) => !prevState)
+						}}
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+			<div {...blockProps}>Piccy Gallery</div>
+		</>
+	);
 }
