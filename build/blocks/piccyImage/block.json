@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "title": "Piccy image",
   "category": "widgets",
-  "icon": "format-images",
+  "icon": "format-image",
   "description": "An image to render within the Piccy Gallery",
   "example": {},
   "supports": {
