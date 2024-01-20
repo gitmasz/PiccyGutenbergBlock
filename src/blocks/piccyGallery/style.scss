@@ -6,6 +6,16 @@
  */
 
 .wp-block-imaszpiccy-piccy-gallery {
+	.image-preview {
+		width: 100%;
+	}
+
+	.gallery-thumbnails {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 10px;
+	}
+
 	.thumb {
 		border-radius: 4px;
 		border: 4px solid transparent;

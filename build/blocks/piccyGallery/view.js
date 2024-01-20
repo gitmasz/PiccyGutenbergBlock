@@ -26,7 +26,24 @@ var __webpack_exports__ = {};
  */
 
 /* eslint-disable no-console */
-console.log('Hello World! (from create-block-piccy block)');
+window.onload = () => {
+  const galleries = Array.from(document.getElementsByClassName("wp-block-imaszpiccy-piccy-gallery"));
+  galleries.forEach(gallery => {
+    const thumbnails = Array.from(gallery.getElementsByClassName("thumb"));
+    if (thumbnails?.[0]) {
+      thumbnails[0].classList.add("selected");
+    }
+    thumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener("click", () => {
+        const selected = Array.from(gallery.getElementsByClassName("thumb selected"));
+        selected.forEach(image => {
+          image.classList.remove("selected");
+        });
+        thumbnail.classList.add("selected");
+      });
+    });
+  });
+};
 /* eslint-enable no-console */
 /******/ })()
 ;
