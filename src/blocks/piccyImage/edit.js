@@ -11,7 +11,11 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	MediaUploadCheck,
+	MediaUpload
+} from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -34,5 +38,28 @@ import metadata from "./block.json";
 export default function Edit() {
 	const blockProps = useBlockProps();
 
-	return <div {...blockProps}></div>;
+	return (
+		<>
+			<div {...blockProps}>
+				<MediaUploadCheck>
+					<MediaUpload
+						allowedTypes={["image"]}
+						render={({ open }) => {
+							return (
+								<button className="media-select" onClick={open}>
+									{__("Select an image", metadata.textdomain)}
+								</button>
+							);
+						}}
+						// value={props.attributes.imageId}
+						// onSelect={(item) => {
+						// 	props.setAttributes({
+						// 		imageId: item.id,
+						// 	});
+						// }}
+					/>
+				</MediaUploadCheck>
+			</div>
+		</>
+	);
 }

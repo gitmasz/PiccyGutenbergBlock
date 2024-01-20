@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	BlockControls,
-	InnerBlocks
+	useInnerBlocksProps
 } from '@wordpress/block-editor';
 import {
 	ToolbarGroup,
@@ -43,6 +43,14 @@ import metadata from "./block.json";
 
 export default function Edit() {
 	const blockProps = useBlockProps();
+	const innerBlocksProps = useInnerBlocksProps(
+		{
+			className: "piccy-gallery-inner-blocks"
+		},
+		{
+			allowedBlocks: ["blockylicious/piccy-image"]
+		}
+	);
 	const [editMode, setEditMode] = useState(true);
 
 	return (
@@ -74,7 +82,7 @@ export default function Edit() {
 						<span className='piccy-label'>
 							{__("Piccy image gallery", metadata.textdomain)}
 						</span>
-						<InnerBlocks allowedBlocks={['imaszpiccy/piccy-image']} />
+						<div {...innerBlocksProps}></div>
 					</div>
 				)}
 				{!editMode && (

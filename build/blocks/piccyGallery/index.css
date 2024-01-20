@@ -23,5 +23,10 @@
   text-transform: uppercase;
   font-size: 10px;
 }
+.wp-block-imaszpiccy-piccy-gallery .piccy-gallery-inner-blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
 
 /*# sourceMappingURL=index.css.map*/

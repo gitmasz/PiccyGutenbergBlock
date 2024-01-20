@@ -55,9 +55,25 @@ __webpack_require__.r(__webpack_exports__);
 
 function Edit() {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
-  });
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
+    allowedTypes: ["image"],
+    render: ({
+      open
+    }) => {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+        className: "media-select",
+        onClick: open
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select an image", _block_json__WEBPACK_IMPORTED_MODULE_4__.textdomain));
+    }
+    // value={props.attributes.imageId}
+    // onSelect={(item) => {
+    // 	props.setAttributes({
+    // 		imageId: item.id,
+    // 	});
+    // }}
+  }))));
 }
 
 /***/ }),
