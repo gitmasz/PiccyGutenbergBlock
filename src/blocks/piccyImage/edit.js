@@ -17,6 +17,7 @@ import {
 	MediaUpload
 } from '@wordpress/block-editor';
 import { useSelect } from "@wordpress/data";
+import { Icon } from "@wordpress/components";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -49,15 +50,28 @@ export default function Edit(props) {
 		},
 		[props.attributes.imageId]
 	);
+	const imageSelected = !!props.attributes.imageId && !!image?.source_url;
 
 	return (
 		<>
 			<div {...blockProps}>
-				{!!props.attributes.imageId && !!image?.source_url && (
+				{!!imageSelected && (
 					<img
-						style={{ height: 150, width: '100%', objectFit: "cover" }}
+						style={{display: "block", height: 150, width: '100%', objectFit: "cover" }}
 						src={image.source_url}
 					/>
+				)}
+				{!imageSelected && (
+					<div
+						style={{
+							display: "flex",
+							height: 150,
+							width: "100%",
+							background: "#fff",
+						}}
+					>
+						<Icon icon="format-image" style={{margin: "auto"}} />
+					</div>
 				)}
 				<MediaUploadCheck>
 					<MediaUpload
@@ -65,7 +79,10 @@ export default function Edit(props) {
 						render={({ open }) => {
 							return (
 								<button className="media-select" onClick={open}>
-									{__("Select an image", metadata.textdomain)}
+									{imageSelected
+										? __("Replace image", metadata.textdomain)
+										: __("Select an image", metadata.textdomain)
+									}
 								</button>
 							);
 						}}

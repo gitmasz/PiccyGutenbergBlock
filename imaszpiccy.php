@@ -24,6 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
+function dashicons_stylesheet() {
+	wp_enqueue_style("dashicons");
+}
+add_action('enqueue_block_assets', 'dashicons_stylesheet');
+
 function imaszpiccy_block_init() {
 	register_block_type( __DIR__ . '/build/blocks/piccyGallery/' );
 	register_block_type( __DIR__ . '/build/blocks/piccyImage/' );

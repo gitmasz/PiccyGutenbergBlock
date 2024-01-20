@@ -5,5 +5,21 @@
  */
 
 .wp-block-imaszpiccy-piccy-image {
-	position: relative;
+	.media-select {
+		width: 100%;
+		padding: 10px 20px;
+		text-align: center;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 10px;
+		cursor: pointer;
+		background: #ddd;
+		box-sizing: border-box;
+		border: none;
+		box-shadow: none;
+
+		&:hover {
+			background: #ccc;
+		}
+	}
 }
