@@ -22,6 +22,8 @@ import {
 	Icon
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
+import { ImageThumbnail } from "../../components/imageThumbnail";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -41,7 +43,8 @@ import './editor.scss';
  */
 import metadata from "./block.json";
 
-export default function Edit() {
+export default function Edit(props) {
+	const [editMode, setEditMode] = useState(true);
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps(
 		{
@@ -51,7 +54,14 @@ export default function Edit() {
 			allowedBlocks: ["blockylicious/piccy-image"]
 		}
 	);
-	const [editMode, setEditMode] = useState(true);
+	const innerBlocks = useSelect(
+		(select) => {
+			const { getBlocksByClientId } = select("core/block-editor");
+			const block = getBlocksByClientId(props.clientId)?.[0];
+			return block?.innerBlocks;
+		},
+		[props.clientId]
+	);
 
 	return (
 		<>
@@ -87,7 +97,9 @@ export default function Edit() {
 				)}
 				{!editMode && (
 					<div className='preview-mode'>
-						Preview mode
+						{(innerBlocks || []).map(innerBlock => (
+							<ImageThumbnail key={innerBlock.clientId} imageId={innerBlock.attributes.imageId} />
+						))}
 					</div>
 				)}
 			</div>

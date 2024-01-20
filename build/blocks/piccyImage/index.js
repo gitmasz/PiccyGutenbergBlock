@@ -18,12 +18,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/piccyImage/editor.scss");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/blocks/piccyImage/block.json");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _hooks_useImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../hooks/useImage */ "./src/hooks/useImage.js");
+/* harmony import */ var _components_imageThumbnail__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/imageThumbnail */ "./src/components/imageThumbnail.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/piccyImage/editor.scss");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/blocks/piccyImage/block.json");
 
 /**
  * Retrieves the translation of text.
@@ -38,6 +38,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
+
 
 
 
@@ -61,21 +62,12 @@ __webpack_require__.r(__webpack_exports__);
 
 function Edit(props) {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  const image = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
-    const data = select("core").getEntityRecord("postType", "attachment", props.attributes.imageId);
-    return data;
-  }, [props.attributes.imageId]);
+  const image = (0,_hooks_useImage__WEBPACK_IMPORTED_MODULE_4__.useImage)(props.attributes.imageId);
   const imageSelected = !!props.attributes.imageId && !!image?.source_url;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
-  }, !!imageSelected && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    style: {
-      display: "block",
-      height: 150,
-      width: '100%',
-      objectFit: "cover"
-    },
-    src: image.source_url
+  }, !!imageSelected && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_imageThumbnail__WEBPACK_IMPORTED_MODULE_5__.ImageThumbnail, {
+    imageId: props.attributes.imageId
   }), !imageSelected && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
@@ -83,7 +75,7 @@ function Edit(props) {
       width: "100%",
       background: "#fff"
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Icon, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Icon, {
     icon: "format-image",
     style: {
       margin: "auto"
@@ -96,7 +88,7 @@ function Edit(props) {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
         className: "media-select",
         onClick: open
-      }, imageSelected ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Replace image", _block_json__WEBPACK_IMPORTED_MODULE_6__.textdomain) : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select an image", _block_json__WEBPACK_IMPORTED_MODULE_6__.textdomain));
+      }, imageSelected ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Replace image", _block_json__WEBPACK_IMPORTED_MODULE_7__.textdomain) : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select an image", _block_json__WEBPACK_IMPORTED_MODULE_7__.textdomain));
     },
     value: props.attributes.imageId,
     onSelect: item => {
@@ -195,6 +187,59 @@ __webpack_require__.r(__webpack_exports__);
 function save() {
   return null;
 }
+
+/***/ }),
+
+/***/ "./src/components/imageThumbnail.js":
+/*!******************************************!*\
+  !*** ./src/components/imageThumbnail.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ImageThumbnail: () => (/* binding */ ImageThumbnail)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _hooks_useImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hooks/useImage */ "./src/hooks/useImage.js");
+
+
+const ImageThumbnail = props => {
+  const image = (0,_hooks_useImage__WEBPACK_IMPORTED_MODULE_1__.useImage)(props.imageId);
+  return image?.source_url ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    style: {
+      display: "block",
+      height: props.height || 150,
+      width: "100%",
+      objectFit: "cover"
+    },
+    src: image.source_url
+  }) : null;
+};
+
+/***/ }),
+
+/***/ "./src/hooks/useImage.js":
+/*!*******************************!*\
+  !*** ./src/hooks/useImage.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useImage: () => (/* binding */ useImage)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+
+const useImage = imageId => {
+  const image = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => {
+    const data = select("core").getEntityRecord("postType", "attachment", imageId);
+    return data;
+  }, [imageId]);
+  return image;
+};
 
 /***/ }),
 
