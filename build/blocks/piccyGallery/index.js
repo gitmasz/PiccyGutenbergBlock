@@ -74,7 +74,13 @@ function Edit() {
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
-  }, "Piccy Gallery"));
+  }, !!editMode && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "edit-mode"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "piccy-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Piccy image gallery", _block_json__WEBPACK_IMPORTED_MODULE_6__.textdomain)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, null)), !editMode && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "preview-mode"
+  }, "Preview mode")));
 }
 
 /***/ }),
@@ -163,7 +169,11 @@ __webpack_require__.r(__webpack_exports__);
  * @return {Element} Element to render.
  */
 function save() {
-  return null;
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save();
+  const {
+    children
+  } = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useInnerBlocksProps.save(blockProps);
+  return children;
 }
 
 /***/ }),
