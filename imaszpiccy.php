@@ -13,6 +13,8 @@
  * @package           create-block
  */
 
+namespace iMaSzPlugins;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -24,13 +26,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function dashicons_stylesheet() {
-	wp_enqueue_style("dashicons");
-}
-add_action('enqueue_block_assets', 'dashicons_stylesheet');
+final class iMaSzPiccy {
+	static function init(){
+		add_action( 'init', function(){
+			register_block_type( __DIR__ . '/build/blocks/piccyGallery/' );
+			register_block_type( __DIR__ . '/build/blocks/piccyImage/' );
+		});
+	}
 
-function imaszpiccy_block_init() {
-	register_block_type( __DIR__ . '/build/blocks/piccyGallery/' );
-	register_block_type( __DIR__ . '/build/blocks/piccyImage/' );
+	static function add_dashicons_stylesheet(){
+		add_action( 'enqueue_block_assets', function(){
+			wp_enqueue_style("dashicons");
+		});
+	}
 }
-add_action( 'init', 'imaszpiccy_block_init' );
+
+iMaSzPiccy::init();
