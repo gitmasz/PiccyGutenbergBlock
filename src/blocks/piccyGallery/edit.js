@@ -74,7 +74,7 @@ export default function Edit() {
 						<span className='piccy-label'>
 							{__("Piccy image gallery", metadata.textdomain)}
 						</span>
-						<InnerBlocks />
+						<InnerBlocks allowedBlocks={['imaszpiccy/piccy-image']} />
 					</div>
 				)}
 				{!editMode && (

@@ -26,5 +26,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function imaszpiccy_block_init() {
 	register_block_type( __DIR__ . '/build/blocks/piccyGallery/' );
+	register_block_type( __DIR__ . '/build/blocks/piccyImage/' );
 }
 add_action( 'init', 'imaszpiccy_block_init' );
