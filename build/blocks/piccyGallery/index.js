@@ -79,6 +79,10 @@ function Edit(props) {
     const block = getBlocksByClientId(props.clientId)?.[0];
     return block?.innerBlocks;
   }, [props.clientId]);
+  const [previewModeImage, setPreviewModeImage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)({
+    imageId: innerBlocks?.[0]?.attributes?.imageId,
+    blockId: innerBlocks?.[0]?.clientId
+  });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
     icon: editMode ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Icon, {
       icon: "welcome-view-site"
@@ -97,11 +101,21 @@ function Edit(props) {
     className: "piccy-label"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Piccy image gallery", _block_json__WEBPACK_IMPORTED_MODULE_8__.textdomain)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...innerBlocksProps
-  })), !editMode && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), !editMode && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "preview-mode"
   }, (innerBlocks || []).map(innerBlock => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_imageThumbnail__WEBPACK_IMPORTED_MODULE_6__.ImageThumbnail, {
     key: innerBlock.clientId,
-    imageId: innerBlock.attributes.imageId
+    imageId: innerBlock.attributes.imageId,
+    height: 75,
+    onClick: () => {
+      setPreviewModeImage({
+        imageId: innerBlock.attributes.imageId,
+        blockId: innerBlock.clientId
+      });
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_imageThumbnail__WEBPACK_IMPORTED_MODULE_6__.ImageThumbnail, {
+    height: "initial",
+    imageId: previewModeImage?.imageId
   })))));
 }
 
@@ -224,6 +238,7 @@ const ImageThumbnail = props => {
       width: "100%",
       objectFit: "cover"
     },
+    onClick: props.onClick,
     src: image.source_url
   }) : null;
 };

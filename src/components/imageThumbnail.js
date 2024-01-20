@@ -11,6 +11,7 @@ export const ImageThumbnail = (props) => {
 				width: "100%",
 				objectFit: "cover",
 			}}
+      onClick={props.onClick}
 			src={image.source_url}
 		/>
 	) : null;
