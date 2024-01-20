@@ -112,7 +112,8 @@ function Edit(props) {
         imageId: innerBlock.attributes.imageId,
         blockId: innerBlock.clientId
       });
-    }
+    },
+    className: `thumb ${innerBlock.clientId === previewModeImage.blockId ? "selected" : ""}`
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_imageThumbnail__WEBPACK_IMPORTED_MODULE_6__.ImageThumbnail, {
     height: "initial",
     imageId: previewModeImage?.imageId
@@ -239,7 +240,8 @@ const ImageThumbnail = props => {
       objectFit: "cover"
     },
     onClick: props.onClick,
-    src: image.source_url
+    src: image.source_url,
+    className: props.className
   }) : null;
 };
 

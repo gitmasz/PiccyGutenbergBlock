@@ -113,6 +113,11 @@ export default function Edit(props) {
 											blockId: innerBlock.clientId,
 										});
 									}}
+									className={`thumb ${
+										innerBlock.clientId === previewModeImage.blockId
+											? "selected"
+											: ""
+									}`}
 								/>
 							))}
 						</div>
